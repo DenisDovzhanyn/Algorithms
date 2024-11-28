@@ -4,7 +4,7 @@ defmodule KNearestNeighbors do
     distances = Enum.sort(find_distances(graph, new_point), fn {_, distance1}, {_, distance2} -> distance1 < distance2 end)
     IO.inspect(distances)
     count = Enum.reduce_while(distances, {%{}, 0}, fn {class, _distance}, {classes, count} ->
-      if count > k do
+      if count >= k do
         {:halt, classes}
       else
         updated_map = Map.update(classes, class, 1, &(&1 + 1))
